@@ -9,17 +9,12 @@ import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/")
-public class MainController {
+public class UsersController {
     private final UserServiceImpl userService;
 
 
-    public MainController(UserServiceImpl userService) {
+    public UsersController(UserServiceImpl userService) {
         this.userService = userService;
-    }
-
-    @GetMapping("login")
-    public String log() {
-        return "login";
     }
 
     @GetMapping("admin")
@@ -36,14 +31,6 @@ public class MainController {
         return "userPage";
     }
 
-//    @GetMapping(value = "create")
-//    public String newUser(User user, Model model) {
-//        model.addAttribute(user);
-//        model.addAttribute("roles", userService.listRoles());
-//        return "create";
-//    }
-
-
     @PostMapping(value = "create")
     public String newUser(@ModelAttribute User user) {
         if (userService.isExistEmail(user)){
@@ -53,13 +40,6 @@ public class MainController {
         return "redirect:/admin";
     }
 
-//    @GetMapping("/update/{id}")
-//    public String edit(Model model, @PathVariable("id") Long id) {
-//        model.addAttribute("user", userService.getUserById(id));
-//        model.addAttribute("roles", userService.listRoles());
-//
-//        return "update";
-//    }
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute User user) {
